@@ -8,7 +8,7 @@ import videoSrc from "../assets/vibgyor5.mp4";
 import RoyalParticles from "./RoyalParticles";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import  ImageRef from "../assets/fashion.jpg"
 import {
