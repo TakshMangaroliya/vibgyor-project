@@ -21,6 +21,7 @@ import {
   Camera,
   Sparkles,
 } from "lucide-react";
+
 import { MdSummarize, MdSpa } from "react-icons/md";
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
@@ -29,6 +30,14 @@ import MagneticButton from "../component/ui/magnetic-button"
 import ParallaxText from "../component/ui/parallax-text"
 import { ChevronLeft, ChevronRight, Quote, Star, Play, Volume2, VolumeX, Gem } from "lucide-react"
 import video from '../assets/reunion.mp4'
+import { FiPhoneCall } from "react-icons/fi";
+import { HiOutlineMailOpen } from "react-icons/hi";
+import { AiOutlineClockCircle } from "react-icons/ai";
+import partyvideo from '../assets/party.mp4';
+import artistvideo from '../assets/wollvideo.mp4';
+import artistphoto from "../assets/wollvideo.jpeg"
+import reunionimage from "../assets/reunion.jpeg"
+import reunionvideo from "../assets/reunion.mp4"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -532,6 +541,42 @@ const Homepage = () => {
     const currentTestimonial = testimonials[currentIndex]
 
 
+ const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    eventType: "",
+    eventDate: "",
+    guestCount: "",
+    budget: "",
+    location: "",
+    vision: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const nextStep = () => setStep((prev) => prev + 1);
+  const prevStep = () => setStep((prev) => prev - 1);
+
+  const handleSubmit = () => {
+    alert("Thank you for your inquiry! We will contact you within 24 hours.");
+  };
+
+    const handleMouseEnter = () => {
+  setIsVideoPlaying(true);
+  videoRef.current?.play().catch((e) => {
+    console.error("Video play failed:", e);
+  });
+};
+
+const handleMouseLeave = () => {
+  setIsVideoPlaying(false);
+  videoRef.current?.pause();
+  videoRef.current.currentTime = 0;
+};
   return (
     <>
 
@@ -551,7 +596,8 @@ const Homepage = () => {
   </video>
 
   {/* ✨ Royal Particles Overlay - z-10 */}
-  <RoyalParticles className="z-10" intensity={0.8} />
+  <RoyalParticles className="z-10"  intensity={0.8} size={5} />
+  
 
   {/* Overlay Tint - z-20 */}
   <div className="absolute top-0 left-0 w-full h-full bg-black/20 z-20"></div>
@@ -797,37 +843,41 @@ const Homepage = () => {
       {/* Royal Section */}
       {/* 1 royal */}
       <div
-        className="min-h-screen bg-[#fafafa] flex items-center justify-center mt-[-70px] p-4 sm:p-8"
-        data-aos="zoom-in"
-        data-aos-duration="2000"
-      >
-        <div className="flex flex-col lg:flex-row min-h-[70vh] rounded-xl overflow-hidden max-w-8xl w-full ">
-          {/* Left Section - Image/Video */}
-          <div
-            className="relative w-full lg:w-1/2 h-64 sm:h-96 lg:h-auto overflow-hidden group"
-            onMouseEnter={() => setIsVideoPlaying(true)}
-            onMouseLeave={() => setIsVideoPlaying(false)}
-          >
-            {/* Background Image/Video */}
-            <div className="absolute inset-0">
-              {/* Placeholder image for when video is not playing or loading */}
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvetnLOz5AF4JPJGxqw0EJpwpBHl9swwqww&s"
-                alt="Concert Crowd"
-                className={`w-full h-full object-cover transition-opacity duration-500 ${isVideoPlaying ? "opacity-0" : "opacity-100"}`}
-              />
-              {/* Video element */}
-              <video
-                src="/videos/video1.mp4"
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isVideoPlaying ? "opacity-100" : "opacity-0"}`}
-                autoPlay={isVideoPlaying}
-                loop
-                muted
-                playsInline
-              >
-                Your browser does not support the video tag.
-              </video>
-            </div>
+      className="min-h-screen bg-[#fafafa] flex items-center justify-center mt-[-70px] p-4 sm:p-8"
+      data-aos="zoom-in"
+      data-aos-duration="2000"
+    >
+      <div className="flex flex-col lg:flex-row min-h-[70vh] rounded-xl overflow-hidden max-w-8xl w-full">
+        {/* Left Section - Image/Video */}
+        <div
+          className="relative w-full lg:w-1/2 h-64 sm:h-96 lg:h-auto overflow-hidden group"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <div className="absolute inset-0">
+            {/* Fallback Image */}
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvetnLOz5AF4JPJGxqw0EJpwpBHl9swwqww&s"
+              alt="Concert Crowd"
+              className={`w-full h-full object-cover transition-opacity duration-500 ${
+                isVideoPlaying ? "opacity-0" : "opacity-100"
+              }`}
+            />
+            {/* Video */}
+            <video
+              ref={videoRef}
+              src={partyvideo}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                isVideoPlaying ? "opacity-100" : "opacity-0"
+              }`}
+              loop
+              muted
+              playsInline
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        {/* </div> */}
 
             {/* Overlay content */}
             <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-between p-4 md:p-6 text-white">
@@ -1095,27 +1145,30 @@ const Homepage = () => {
           </div>
 
           {/* Right Section - Image/Video */}
-          <div
-            className="relative w-full lg:w-1/2 h-64 sm:h-96 lg:h-auto overflow-hidden group order-1 lg:order-2"
-            onMouseEnter={() => setIsVideoPlaying(true)}
-            onMouseLeave={() => setIsVideoPlaying(false)}
-          >
-            {/* Background Image/Video */}
-            <div className="absolute inset-0">
-              <img
-                src="/public/img-2.jpg"
-                alt="Concert Crowd"
-                className={`w-full h-full object-cover transition-opacity duration-500 ${isVideoPlaying ? "opacity-0" : "opacity-100"}`}
-              />
-              <video
-                src="/videos/video2.mp4"
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isVideoPlaying ? "opacity-100" : "opacity-0"}`}
-                autoPlay={isVideoPlaying}
-                loop
-                muted
-                playsInline
-              >
-                Your browser does not support the video tag.
+    <div
+  className="relative w-full lg:w-1/2 h-64 sm:h-96 lg:h-auto overflow-hidden group order-1 lg:order-2"
+  onMouseEnter={handleMouseEnter}
+  onMouseLeave={handleMouseLeave}
+>
+  <div className="absolute inset-0">
+    <img
+      src={artistphoto}
+      alt="Concert Crowd"
+      className={`w-full h-full object-cover transition-opacity duration-500 ${
+        isVideoPlaying ? "opacity-0" : "opacity-100"
+      }`}
+    />
+    <video
+      ref={videoRef}
+      src={artistvideo}
+      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+        isVideoPlaying ? "opacity-100" : "opacity-0"
+      }`}
+      loop
+      muted
+      playsInline
+    >             
+         Your browser does not support the video tag.
               </video>
             </div>
 
@@ -1194,12 +1247,12 @@ const Homepage = () => {
             {/* Background Image/Video */}
             <div className="absolute inset-0">
               <img
-                src="/public/img-3.jpg"
+                src={reunionimage}
                 alt="Concert Crowd"
                 className={`w-full h-full object-cover transition-opacity duration-500 ${isVideoPlaying ? "opacity-0" : "opacity-100"}`}
               />
               <video
-                src="/videos/video3.mp4"
+                src={reunionvideo}
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isVideoPlaying ? "opacity-100" : "opacity-0"}`}
                 autoPlay={isVideoPlaying}
                 loop
@@ -1381,8 +1434,8 @@ const Homepage = () => {
 
 
 {/* spectrum  */}
-  <div className="relative overflow-hidden">
-       <RoyalParticles className="z-0" intensity={0.3} />
+   <div className="relative overflow-hidden" data-aos="fade-up">
+      <RoyalParticles className="z-0" intensity={0.3} />
       <div className="container mx-auto relative z-10">
         <section className="w-full text-center overflow-hidden py-10">
           <div className="relative z-10 px-4 sm:px-6">
@@ -1394,7 +1447,7 @@ const Homepage = () => {
               }`}
             >
               <div className="h-px w-20 sm:w-28 bg-gradient-to-r from-transparent to-violet-500 opacity-40"></div>
-              <h4 className="text-sm sm:text-base md:text-lg font-semibold tracking-widest text-violet-600 uppercase mx-3 sm:mx-5 font-inter">
+              <h4 className="text-sm sm:text-base md:text-lg font-semibold tracking-widest text-violet-600 uppercase mx-3 sm:mx-5">
                 Our Spectrum
               </h4>
               <div className="h-px w-20 sm:w-28 bg-gradient-to-l from-transparent to-violet-500 opacity-40"></div>
@@ -1407,7 +1460,7 @@ const Homepage = () => {
                   : "opacity-0 translate-y-8"
               }`}
             >
-              <h2 className="text-[2.3rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[7.5rem] font-serif font-bolder text-slate-900 leading-tight tracking-tight">
+              <h2 className=" spectrum-title  text-[2.3rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[7.5rem] font-serif font-bolder text-slate-900 leading-tight tracking-tight">
                 SPECTRUM OF
               </h2>
               <h3 className="text-[1.8rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4rem] font-serif font-bolder bg-gradient-to-r from-indigo-600 via-blue-600 to-violet-600 bg-clip-text text-transparent mt-1">
@@ -1416,7 +1469,7 @@ const Homepage = () => {
             </div>
 
             <p
-              className={`max-w-5xl mx-auto mt-6 text-sm sm:text-base md:text-lg text-gray-500 px-2 font-inter leading-relaxed transition-all duration-1000 delay-500 ${
+              className={`max-w-5xl mx-auto mt-6 text-sm sm:text-base md:text-lg text-gray-500 px-2 leading-relaxed transition-all duration-1000 delay-500 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-4"
@@ -1429,77 +1482,71 @@ const Homepage = () => {
             </p>
           </div>
         </section>
+       <section className="py-6" ref={sectionRef}>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-[1400px] mx-auto px-6">
 
-        <section className="py-2" ref={sectionRef}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 p-2 max-w-8xl mx-auto ">
             {cardData.map((card, index) => {
               const IconComponent = card.icon;
               return (
-                <div
-                  key={index}
-                  ref={(el) => (cardRefs.current[index] = el)}
-                  className="spectrum-card overflow-hidden group w-full relative  bg-white rounded-3xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-violet-300 transition-all duration-700 ease-in-out p-10 flex flex-col transform hover:-translate-y-2 hover:scale-105 cursor-pointer"
-                >
+               <div
+  key={index}
+  ref={(el) => (cardRefs.current[index] = el)}
+  className="spectrum-card group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-violet-300 transition-all duration-700 ease-in-out p-8 flex flex-col justify-between min-h-[400px] h-full cursor-pointer"
+  data-aos="fade-up"
+  data-aos-delay={index * 100}
+  data-aos-duration="1000"
+>
                   {/* 👉 Hover gradient background layer */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#d8f3ff] to-[#f3e8ff] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 " />
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#d8f3ff] to-[#f3e8ff] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
 
                   <div className="absolute left-2 top-3 flex flex-col items-center gap-3 h-full z-10">
                     {/* Dot */}
-                    <div
-                      className="absolute top-1 left-3 w-2.5 h-2.5 bg-violet-500 rounded-full z-20
-                  opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100
-                  transition-all duration-500 ease-in-out"
-                    ></div>
+                    <div className="absolute top-1 left-3 w-2.5 h-2.5 bg-violet-500 rounded-full z-20 opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 ease-in-out" />
                     {/* Full Height Line */}
-                    <div className="w-1 h-full bg-gradient-to-b from-violet-500 to-indigo-500 rounded-full transform scale-y-0 group-hover:scale-y-100 mt-0 transition-transform duration-500 origin-top"></div>
+                    <div className="w-1 h-full bg-gradient-to-b from-violet-500 to-indigo-500 rounded-full transform scale-y-0 group-hover:scale-y-100 mt-0 transition-transform duration-500 origin-top" />
                   </div>
 
                   {/* Tag Badge */}
                   {card.tag && (
-                    <div className="absolute top-4 right-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg group-hover:scale-110 transition-all duration-300 rotate-[0deg] group-hover:rotate-2 ">
+                    <div className="absolute top-4 right-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg group-hover:scale-110 transition-all duration-300 rotate-[0deg] group-hover:rotate-2">
                       <span className="text-yellow-300">💎</span>
                       {card.tag}
                     </div>
                   )}
 
-                  {/* Icon Box with Tilt */}
-                  <div className="w-20 h-20 flex items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 text-white mb-6 transform rotate-[0deg] group-hover:rotate-6 group-hover:scale-110 transition-all duration-500 shadow-lg group-hover:shadow-xl">
-                    <IconComponent size={36} />
-                  </div>
+                 <div className="relative z-10 flex flex-col h-full">
+  {/* Icon */}
+  <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 text-white mb-4 text-xl shadow-lg">
+    <IconComponent size={28} />
+  </div>
 
-                  {/* Subtitle */}
-                  <p className="text-left text-purple-600 text-xs font-bold tracking-[0.15em] mb-2 uppercase transition-transform duration-300 group-hover:scale-105 font-inter">
-                    {card.subtitle}
-                  </p>
+  {/* Subtitle */}
+  <p className="text-purple-600 text-xs font-bold tracking-wide uppercase mb-1">
+    {card.subtitle}
+  </p>
 
-                  {/* Title */}
-                  <h3 className="text-left text-2xl font-bold text-gray-900 mb-4 transition-all duration-300 group-hover:text-purple-700 group-hover:scale-105 font-playfair">
-                    {card.title}
-                  </h3>
+  {/* Title */}
+  <h3 className="text-lg font-semibold text-gray-900 mb-2">{card.title}</h3>
 
-                  {/* Count */}
-                  <div className="inline-flex items-center bg-purple-100 text-sm font-semibold text-black px-4 py-2 rounded-full mb-4 w-fit transition-transform duration-300 group-hover:scale-105 font-inter">
-                    {card.count}
-                  </div>
+  {/* Count */}
+  <div className="inline-flex items-center bg-purple-100 text-sm text-purple-700 px-3 py-1 rounded-full mb-3 w-fit">
+    {card.count}
+  </div>
 
-                  <p className="text-left text-black text-sm leading-relaxed flex-grow mb-6 transition-all duration-300 group-hover:tracking-wide group-hover:scale-[1.01] group-hover:font-medium font-inter">
-                    {card.desc}
-                  </p>
+  {/* Description */}
+  <p className="text-gray-600 text-sm leading-snug mb-5">{card.desc}</p>
 
-                  {/* Bottom Gradient Line */}
-                  <div
-                    className={`h-1 w-full bg-gradient-to-b from-violet-500 to-indigo-500 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left mb-4 `}
-                  />
+  {/* Bottom Line */}
+  <div className="h-[1px] w-full bg-gradient-to-r from-violet-500 to-indigo-500 mb-3" />
 
-                  {/* Explore Section */}
-                  <div className="flex items-center justify-between text-blue-800 font-semibold text-sm tracking-wide opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100 font-inter">
-                    <span>EXPLORE</span>
-                    <ArrowRight
-                      size={18}
-                      className="transform group-hover:translate-x-2 transition-transform duration-300 font-inter"
-                    />
-                  </div>
-                </div>
+  {/* Explore */}
+  <div className="flex items-center justify-between text-blue-800 text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-y-3 group-hover:translate-y-0 transition-all duration-500 delay-150">
+    <span>EXPLORE</span>
+    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+  </div>
+</div>
+</div>
+
               );
             })}
           </div>
@@ -1535,7 +1582,7 @@ const Homepage = () => {
 
             <div className="absolute inset-0 opacity-8">
                 <div className="testimonial-bg-1 absolute top-1/4 left-0 w-[600px] h-[600px] bg-gradient-to-r from-[#8A2BE2] to-[#0056B3] rounded-full blur-3xl"></div>
-                <div className="testimonial-bg-2 absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-gradient-to-l from-[#008080] to-[#8A2BE2] rounded-full blur-3xl"></div>
+                <div className="testimonial-bg-2 absolute bottom-1/4 right-0 w-[300px] h-[300px] bg-gradient-to-l from-[#7bacac] to-[#bca2d5] rounded-full blur-3xl"></div>
                 <div className="testimonial-bg-3 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-to-r from-[#0056B3] to-[#008080] rounded-full blur-2xl"></div>
             </div>
 
@@ -1557,7 +1604,7 @@ const Homepage = () => {
                                 VOICES OF
                             </h2>
                         </ParallaxText>
-                        <div className="title-sub text-5xl md:text-6xl lg:text-8xl bg-gradient-to-r from-[#8A2BE2] via-[#0056B3] to-[#008080] bg-clip-text text-transparent font-light mb-8">
+                        <div className="title-sub text-5xl md:text-6xl lg:text-8xl bg-gradient-to-r from-[#caabe8] via-[#a6c4e3] to-[#acdbdb] bg-clip-text text-transparent font-light mb-8">
                             EXCELLENCE
                         </div>
                     </div>
@@ -1766,6 +1813,7 @@ const Homepage = () => {
 
 
 {/* portfolio  */}
+
  <div className="relative min-h-screen bg-black text-white font-inter overflow-hidden" data-aos="fade-up" >
       {/* main element remains the overall container for content */}
       <main className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 py-1">
@@ -1779,6 +1827,7 @@ const Homepage = () => {
             className="absolute inset-0 pointer-events-none z-0"
             style={{ background: 'transparent' }}
           />
+           {/* <RoyalParticles intensity={0.8} size={7} /> */}
 
           {/* Content within the first section, placed on top of the canvas */}
           <div className="relative z-10"> {/* Added relative z-10 to ensure content is above canvas */}
@@ -1939,7 +1988,7 @@ const Homepage = () => {
             </div>
 
           </div>
-
+  {/* <RoyalParticles intensity={0.8} size={7} /> */}
           {/* Button */}
           <div className="mt-18 flex justify-center py-16 mb-10">
             <button className="flex items-center px-10 py-4 text-lg font-medium text-white uppercase tracking-wider border border-gray-600 bg-white/10 animate-fadeInUp transition-all duration-700 hover:bg-white hover:border-gray-500 hover:text-black group-hover:opacity-100
@@ -1957,6 +2006,8 @@ transform translate-y-4 group-hover:translate-y-0">
 
 
 {/* video section  */}
+
+
 <div className="relative min-h-screen overflow-hidden bg-black text-white font-inter"> {/* Added font-inter here */}
             {/* Background Video */}
             <video
@@ -1980,7 +2031,7 @@ transform translate-y-4 group-hover:translate-y-0">
                 className="fixed inset-0 pointer-events-none z-10"
                 style={{ background: 'transparent' }}
             />
-
+ <RoyalParticles intensity={0.8} size={6} />
             {/* Foreground Content */}
             {/* Attached contentRef to this div for children animation */}
             {/* min-h-screen added to ensure this section is tall enough to allow content to center */}
@@ -2068,7 +2119,159 @@ transform translate-y-4 group-hover:translate-y-0">
             </div>
         </div>
 
-</>
+
+
+ {/* 📝 Multi-Step Form */}
+      <div className="relative overflow-hidden">
+        <RoyalParticles className="z-0" intensity={0.3} />
+        <div className="min-h-screen bg-gradient-to-b from-black via-[#0d0d0d] to-[#121212] flex flex-col overflow-x-hidden items-center justify-center text-center px-4 py-10 sm:p-20">
+          <section>
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <span className="w-12 sm:w-20 h-px bg-gray-700"></span>
+              <Crown className="text-purple-500 w-6 h-6" />
+              <span className="w-12 sm:w-20 h-px bg-gray-700"></span>
+            </div>
+            <h2 className="text-3xl sm:text-7xl font-serif font-semibold text-white">BOOK YOUR</h2>
+            <h2 className="text-3xl sm:text-7xl font-serif font-semibold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-blue-700 mt-1">
+              ROYAL EVENT
+            </h2>
+            <p className="text-gray-300 mt-4 sm:mt-6 max-w-2xl mx-auto text-base sm:text-xl px-2">
+              Begin your journey to an extraordinary celebration. Our team will craft a bespoke experience that exceeds your wildest dreams.
+            </p>
+          </section>
+
+          {/* 🌟 Form Box */}
+          <div className="relative w-full max-w-4xl mx-auto mt-10 sm:mt-12 group rounded-2xl shadow-xl overflow-hidden px-2">
+            <div className="absolute left-0 top-0 h-full z-30">
+              <div className="w-1 h-full bg-gradient-to-b from-violet-500 to-indigo-500 rounded-full" />
+            </div>
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-[#8A2BE2] to-[#0056B3] rounded-full blur-3xl opacity-50 z-0" />
+            <div className="relative z-20 bg-white/10 backdrop-blur-md rounded-2xl">
+              <div className="bg-[#0f0f0f]/90 backdrop-blur-xl rounded-2xl px-4 py-6 sm:px-10 sm:py-10 text-white">
+                {/* Step Circles */}
+                <div className="flex justify-between items-center mb-3">
+                  {[1, 2, 3].map((s) => (
+                    <div
+                      key={s}
+                      className={`w-10 h-10 flex items-center justify-center rounded-full border-2 ${
+                        step >= s
+                          ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white'
+                          : 'border-gray-600 text-gray-400'
+                      }`}
+                    >
+                      {s}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Progress Bar */}
+                <div className="w-full h-2 rounded-full bg-gray-800 overflow-hidden mb-6">
+                  <div
+                    className="h-full bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-500 ease-in-out"
+                    style={{
+                      width: step === 1 ? '2%' : step === 2 ? '50%' : '100%',
+                    }}
+                  />
+                </div>
+
+                {/* Render Step Components */}
+                {step === 1 && (
+                  <Step1 formData={formData} handleChange={handleChange} nextStep={nextStep} />
+                )}
+                {step === 2 && (
+                  <Step2
+                    formData={formData}
+                    handleChange={handleChange}
+                    nextStep={nextStep}
+                    prevStep={prevStep}
+                  />
+                )}
+                {step === 3 && (
+                  <Step3
+                    formData={formData}
+                    handleChange={handleChange}
+                    prevStep={prevStep}
+                    handleSubmit={handleSubmit}
+                  />
+                )}
+
+                {/* Contact Info */}
+                <div className="mt-10 border-t border-gray-700 pt-8 text-center">
+                  <h3 className="text-lg font-semibold text-white mb-6">
+                    Prefer to speak directly?
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm text-gray-400">
+                    <div className="flex flex-col items-center gap-2">
+                      <FiPhoneCall className="w-6 h-6 text-purple-500" />
+                      <p className="text-white font-medium">+91 98765 43210</p>
+                      <p>24/7 Available</p>
+                    </div>
+                    <div className="flex flex-col items-center gap-2">
+                      <HiOutlineMailOpen className="w-6 h-6 text-blue-400" />
+                      <p className="text-white font-medium">hello@vibgyorevents.com</p>
+                      <p>Response in 2 hours</p>
+                    </div>
+                    <div className="flex flex-col items-center gap-2">
+                      <AiOutlineClockCircle className="w-6 h-6 text-teal-400" />
+                      <p className="text-white font-medium">Mon–Sun 9AM–9PM</p>
+                      <p>Consultation Hours</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+// Step 1 Component
+function Step1({ formData, handleChange, nextStep }) {
+  return (
+    <>
+      <h3 className="text-xl font-semibold font-serif mb-4 text-left">Step 1: Personal Info</h3>
+      <input name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} className="mb-4 p-2 w-full rounded" />
+      <input name="email" placeholder="Email" value={formData.email} onChange={handleChange} className="mb-4 p-2 w-full rounded" />
+      <input name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} className="mb-6 p-2 w-full rounded" />
+      <button onClick={nextStep} className="bg-purple-600 px-6 py-2 rounded text-white">Next</button>
+    </>
+  );
+}
+
+// Step 2 Component
+function Step2({ formData, handleChange, nextStep, prevStep }) {
+  return (
+    <>
+      <h3 className="text-xl font-semibold font-serif mb-4 text-left">Step 2: Event Info</h3>
+      <input name="eventType" placeholder="Event Type" value={formData.eventType} onChange={handleChange} className="mb-4 p-2 w-full rounded" />
+      <input name="eventDate" type="date" value={formData.eventDate} onChange={handleChange} className="mb-4 p-2 w-full rounded" />
+      <input name="guestCount" placeholder="Guest Count" value={formData.guestCount} onChange={handleChange} className="mb-4 p-2 w-full rounded" />
+      <input name="budget" placeholder="Budget" value={formData.budget} onChange={handleChange} className="mb-4 p-2 w-full rounded" />
+      <input name="location" placeholder="Location" value={formData.location} onChange={handleChange} className="mb-6 p-2 w-full rounded" />
+      <div className="flex gap-4">
+        <button onClick={prevStep} className="bg-gray-600 px-6 py-2 rounded text-white">Back</button>
+        <button onClick={nextStep} className="bg-purple-600 px-6 py-2 rounded text-white">Next</button>
+      </div>
+    </>
+  );
+}
+
+// Step 3 Component
+function Step3({ formData, handleChange, prevStep, handleSubmit }) {
+  return (
+    <>
+      <h3 className="text-xl font-semibold font-serif mb-4 text-left">Step 3: Final Touch</h3>
+      <textarea name="vision" placeholder="Describe your event vision..." value={formData.vision} onChange={handleChange} className="mb-6 p-2 w-full rounded h-32" />
+      <div className="flex gap-4">
+        <button onClick={prevStep} className="bg-gray-600 px-6 py-2 rounded text-white">Back</button>
+        <button onClick={handleSubmit} className="bg-blue-600 px-6 py-2 rounded text-white">Submit</button>
+      </div>
+    </>
+
+
+// </>
 
   );
 };

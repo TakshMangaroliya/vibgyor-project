@@ -2,7 +2,8 @@ import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 
-const AnimatedStars = ({ intensity }) => {
+// Inner star animation group
+const AnimatedStars = ({ intensity, size }) => {
   const starsRef = useRef();
 
   useFrame(() => {
@@ -18,7 +19,7 @@ const AnimatedStars = ({ intensity }) => {
         radius={120}
         depth={80}
         count={6000 * intensity}
-        factor={5}
+        factor={size}               // ✅ This controls the star size
         saturation={1}
         fade
         speed={3}
@@ -27,16 +28,16 @@ const AnimatedStars = ({ intensity }) => {
   );
 };
 
-const RoyalParticles = ({ className = '', intensity = 1 }) => {
+// Main export
+const RoyalParticles = ({ className = '', intensity = 1, size = 4 }) => {
   return (
     <div className={`absolute top-0 left-0 w-full h-full pointer-events-none ${className}`}>
       <Canvas
         camera={{ position: [0, 0, 1] }}
-        gl={{ alpha: true }}           // ✅ Transparent background
+        gl={{ alpha: true }} // Transparent background
       >
-        {/* No <color attach="background" /> to let video show */}
         <ambientLight intensity={2.5} />
-        <AnimatedStars intensity={intensity} />
+        <AnimatedStars intensity={intensity} size={size} />
       </Canvas>
     </div>
   );
