@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useEffect } from "react"
-import gsap from "gsap"
+import {gsap} from "gsap"
 
 export default function MagneticButton({ children, className = "", strength = 0.3, onClick }) {
   const buttonRef = useRef(null)

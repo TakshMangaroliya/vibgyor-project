@@ -1,23 +1,30 @@
-import React from 'react';
-import './App.css'; // Tailwind CSS imports should be here
-import Header from './pages/Header';
-import Homepage from './pages/Homepage';
-import Footer from './pages/Footer';
-
+import { Routes, Route } from 'react-router-dom'
+import Homepage from './pages/Homepage'
+import Header from './pages/Header'
+import Footer from './pages/Footer'
+import Contact from './pages/Contact'
+import ConsultationForm from './pages/ConsultationForm'
+import PhotoPortfolio from './pages/PhotoPortfolio'
+import ScrollToTopCircle from './pages/ScrollToTopCircle'
+import RoyalWedding from './pages/RoyalWedding'
 
 
 function App() {
   return (
-    <>
-   
-      <Header />
-      <Homepage/>
+    <>    
+      <Header/>
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+      <Route path='/contact' element={<Contact/>}/>
+      <Route path='/book' element={<ConsultationForm/>}/>\
+      <Route path='/portfolio' element={<PhotoPortfolio/>}/>
+      <Route path='/wedding' element={<RoyalWedding/>}/>
+    </Routes>
       <Footer/>
-      
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet" />
-     
+      <ScrollToTopCircle/>
     </>
-  );
+
+  )
 }
 
-export default App;
+export default App

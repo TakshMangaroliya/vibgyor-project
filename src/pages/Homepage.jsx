@@ -1,16 +1,12 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { FaPlay } from "react-icons/fa";
-import Particles from "@tsparticles/react";
-import { loadBasic } from "@tsparticles/basic";
-import videoSrc from "../assets/vibgyor5.mp4";
-import RoyalParticles from "./RoyalParticles";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import  ImageRef from "../assets/fashion.jpg"
+import { FaPlay, FaStar, FaCalendarAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
+import { MdSummarize, MdSpa } from "react-icons/md";
+import { FiPhoneCall } from "react-icons/fi";
+import { HiOutlineMailOpen } from "react-icons/hi";
+import { AiOutlineClockCircle } from "react-icons/ai";
+
 import {
   Crown,
   Users,
@@ -20,24 +16,44 @@ import {
   Utensils,
   Camera,
   Sparkles,
+  ChevronLeft,
+  ChevronRight,
+  Quote,
+  Star,
+  Play,
+  Volume2,
+  VolumeX,
+  Gem
 } from "lucide-react";
 
-import { MdSummarize, MdSpa } from "react-icons/md";
-import { useInView } from 'react-intersection-observer';
-import { motion } from 'framer-motion';
-import CountUp from 'react-countup';
-import MagneticButton from "../component/ui/magnetic-button"
-import ParallaxText from "../component/ui/parallax-text"
-import { ChevronLeft, ChevronRight, Quote, Star, Play, Volume2, VolumeX, Gem } from "lucide-react"
-import video from '../assets/reunion.mp4'
-import { FiPhoneCall } from "react-icons/fi";
-import { HiOutlineMailOpen } from "react-icons/hi";
-import { AiOutlineClockCircle } from "react-icons/ai";
-import partyvideo from '../assets/party.mp4';
-import artistvideo from '../assets/wollvideo.mp4';
-import artistphoto from "../assets/wollvideo.jpeg"
-import reunionimage from "../assets/reunion.jpeg"
-import reunionvideo from "../assets/reunion.mp4"
+import Particles from "@tsparticles/react";
+import { loadBasic } from "@tsparticles/basic";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
+import CountUp from "react-countup";
+
+// Custom Components
+import MagneticButton from "../component/ui/magnetic-button";
+import ParallaxText from "../component/ui/parallax-text";
+import RoyalParticles from "./RoyalParticles";
+
+// Assets
+import videoSrc from "../assets/vibgyor5.mp4";
+import partyvideo from "../assets/party.mp4";
+import artistvideo from "../assets/wollvideo.mp4";
+import artistphoto from "../assets/wollvideo.jpeg";
+import reunionimage from "../assets/reunion.jpeg";
+import reunionvideo from "../assets/reunion.mp4";
+import ImageRef from "../assets/fashion.jpg";
+
+// import { FaStar, FaPlay, FaCalendarAlt, FaClock } from 'react-icons';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -218,6 +234,93 @@ const testimonials = [
     },
 ]
 
+const events = [
+    {
+      id: 1,
+      title: "Royal Symphony Gala",
+      description: "An evening of classical music featuring world-renowned orchestras and soloists.",
+      date: "March 15, 2024",
+      time: "7:00 PM",
+      location: "Grand Opera House, Mumbai",
+      price: "Star Luxury",
+      type: "Invitation Only",
+      image: "https://bridelifestyle.com/storage/photos/july2023/wedding-music-genres-for-every-type-of-celebration-radio-kings-band.webp",
+      video: "v1.mp4",
+      rating: 4.9,
+      category: "From ₹5,000"
+    },
+    {
+      id: 2,
+      title: "Contemporary Art Showcase",
+      description: "Interactive art exhibition showcasing contemporary artists and their masterpieces.",
+      date: "March 22, 2025",
+      time: "6:00 PM",
+      location: "Heritage Gallery, Delhi",
+      price:  "Invitation Only",
+      type: "Limited Seats",
+      image: "https://images.unsplash.com/photo-1625076932159-61a032e2b7ad?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2VkZGluZyUyMGV2ZW50fGVufDB8fDB8fHww",
+      video: "v3.mp4",
+      rating: 4.8,
+      category: "₹12,000"
+    },
+    {
+      id: 3,
+      title: "Culinary Constellation",
+      description: "A gastronomic journey featuring world-class chefs and exotic cuisines.",
+      date: "March 29, 2025",
+      time: "8:00 PM",
+      location: "Sky Terrace, Bangalore",
+      price: "Luxury",
+      type: "VIP Access",
+      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      video: "v2.mp4",
+      rating: 4.9,
+      category: "From ₹12,000"
+    },
+    {
+      id: 4,
+      title: "Jazz Under the Stars",
+      description: "Open-air jazz concert with international performers under the night sky.",
+      date: "April 5, 2025",
+      time: "9:00 PM",
+      location: "Moonlight Gardens, Chennai",
+      price: " Music Night",
+      type: "Outdoor Event",
+      image: "https://static.vecteezy.com/system/resources/previews/035/996/213/non_2x/ai-generated-silhouette-of-a-bride-and-groom-on-the-background-of-the-night-sky-a-dreamy-night-wedding-beneath-a-sky-full-of-stars-ai-generated-free-photo.jpg",
+      video: "v4.mp4",
+      rating: 4.6,
+      category: "From ₹8,500"
+    },
+    {
+      id: 5,
+      title: "Fashion Week Finale",
+      description: "Runway show featuring emerging and established designers..",
+      date: "April 12, 2025",
+      time: "7:30 PM",
+      location: "Crystal Hall, Hyderabad",
+      price: "Luxury Fashion ",
+      type: "Front Row Access",
+      image: "https://images.pexels.com/photos/6119559/pexels-photo-6119559.jpeg",
+      video: "v3.mp4",
+      rating: 4.5,
+      category: "From ₹10,000"
+    },
+    {
+      id: 6,
+      title: "Wine & Whiskey Tasting",
+      description: "Premium tasting experience with rare vintages and aged single malts.",
+      date: "April 19, 2024",
+      time: "6:30 PM",
+      location: "Vintage Cellar, Pune",
+      price: "Elite Tasting ",
+      type: "Exclusive Event",
+      image: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2VkZGluZyUyMHdpbmV8ZW58MHx8MHx8fDA%3D",
+      video: "v1.mp4",
+      rating: 4.9,
+      category: "From ₹18,000"
+    }
+  ];
+
 
 const Homepage = () => {
    const [isVideoPlaying, setIsVideoPlaying] = useState(false) // ✅ Moved inside component
@@ -278,7 +381,8 @@ const Homepage = () => {
       duration: 1200,
       offset: 100,
       once: true,
-      easing: "ease-in-out",
+      easing: "ease-out"
+     
     });
 
     const ctx = gsap.context(() => {
@@ -596,7 +700,7 @@ const handleMouseLeave = () => {
   </video>
 
   {/* ✨ Royal Particles Overlay - z-10 */}
-  <RoyalParticles className="z-10"  intensity={0.8} size={5} />
+  <RoyalParticles className="z-10"  intensity={0.8} size={4} />
   
 
   {/* Overlay Tint - z-20 */}
@@ -788,786 +892,261 @@ const handleMouseLeave = () => {
 
 
 {/* Experience Section  */}
-<section>
-   <div className="min-h-screen bg-[#fafafa] flex flex-col items-center justify-center py-8 md:py-[60px] px-4 md:px-[40px] font-['Times_New_Roman']">
-  {/* Featured Label with Lines */}
-  <div
-    className={`flex items-center justify-center mb-12 md:mb-[80px] transition-all duration-1000 ${
-      isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-    }`}
-  >
-    {/* Left Line */}
-    <div className="h-[2px] w-20 sm:w-28 bg-gradient-to-r from-transparent to-violet-500 opacity-40"></div>
+ <div className="min-h-screen bg-[#fafafa] flex flex-col items-center py-8 md:py-[60px] px-4 md:px-[40px] font-['Times_New_Roman']">
+      {/* Featured Label with Lines */}
+      <div className="flex items-center mb-12 md:mb-[80px] w-full max-w-[400px]" data-aos="fade-up" data-aos-duration="1500">
+        <div className="w-32 h-px bg-gradient-to-r from-transparent via-[#8A2BE2] to-transparent"></div>
+        <span className="text-sm md:text-[17px] font-medium text-[#8A2BE2] tracking-[3px] md:tracking-[6px] mx-4 md:mx-[30px] font-sans" >
+          EVENTS
+        </span>
+        <div className="w-32 h-px bg-gradient-to-r from-transparent via-[#8A2BE2] to-transparent"></div>
+      </div>
 
-    {/* FEATURED Text */}
-    <span className="text-sm md:text-[17px] font-medium text-[#8A2BE2] tracking-[3px] md:tracking-[6px] mx-4 md:mx-[30px] font-sans">
-      FEATURED
-    </span>
-
-    {/* Right Line */}
-    <div className="h-[2px] w-20 sm:w-28 bg-gradient-to-l from-transparent to-violet-500 opacity-40"></div>
-  </div>
-{/* </div> */}
-{/* </div> */}
-
-        {/* Main Heading */}
-        <div className="text-center mb-8 md:mb-[50px]">
-          <h1
-            className="text-4xl sm:text-6xl md:text-8xl lg:text-[128px] font-normal text-[#1a1a1a] m-0 leading-[0.85] tracking-[-1px] md:tracking-[-3px] font-['Didot, Bodoni, Playfair Display']"
-            data-aos="fade-up"
-            data-aos-duration="1000"
-          >
-            EXTRAORDINARY
-          </h1>
-          <h2
-            className="text-2xl sm:text-4xl md:text-5xl lg:text-[72px] font-normal text-[#2563eb] mt-2 md:mt-[15px] mb-0 leading-[0.85] tracking-[-1px] md:tracking-[-2px] font-['Playfair Display, Georgia']"
-            data-aos="fade-up"
-            data-aos-duration="1500"
-          >
-            EXPERIENCES
-          </h2>
-        </div>
-
-        {/* Description */}
-        <p
-          className="text-base md:text-[18px] text-[#666666] text-center max-w-[800px] leading-[1.7] m-0 font-normal  font-sans px-4"
+      {/* Main Heading */}
+      <div className="text-center mb-8 md:mb-[50px]">
+        <h1
+          className="text-4xl sm:text-6xl md:text-8xl lg:text-[128px] font-normal text-[#1a1a1a] m-0 leading-[0.85] tracking-[-1px] md:tracking-[-3px] font-['Didot, Bodoni, Playfair Display']"
           data-aos="fade-up"
-          data-aos-duration="2000"
-        >
-          Discover our carefully curated selection of premium events, each designed to create
-          <br className="hidden md:block" />
-          unforgettable moments and lasting memories that transcend the ordinary.
-        </p>
+          data-aos-duration="1400">
+          EXTRAORDINARY
+        </h1>
+        <h2
+          className="text-2xl sm:text-4xl md:text-5xl lg:text-[72px] font-normal text-[#2563eb] mt-2 md:mt-[15px] mb-0 leading-[0.85] tracking-[-1px] md:tracking-[-2px] font-['Playfair Display, Georgia']"
+          data-aos="fade-up"
+          data-aos-duration="1800">
+          EXPERIENCES
+        </h2>
       </div>
 
-      {/* Royal Section */}
-      {/* 1 royal */}
-      <div
-      className="min-h-screen bg-[#fafafa] flex items-center justify-center mt-[-70px] p-4 sm:p-8"
-      data-aos="zoom-in"
-      data-aos-duration="2000"
-    >
-      <div className="flex flex-col lg:flex-row min-h-[70vh] rounded-xl overflow-hidden max-w-8xl w-full">
-        {/* Left Section - Image/Video */}
-        <div
-          className="relative w-full lg:w-1/2 h-64 sm:h-96 lg:h-auto overflow-hidden group"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="absolute inset-0">
-            {/* Fallback Image */}
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvetnLOz5AF4JPJGxqw0EJpwpBHl9swwqww&s"
-              alt="Concert Crowd"
-              className={`w-full h-full object-cover transition-opacity duration-500 ${
-                isVideoPlaying ? "opacity-0" : "opacity-100"
-              }`}
-            />
-            {/* Video */}
-            <video
-              ref={videoRef}
-              src={partyvideo}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                isVideoPlaying ? "opacity-100" : "opacity-0"
-              }`}
-              loop
-              muted
-              playsInline
-            >
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        {/* </div> */}
+      {/* Description */}
+      <p
+        className="text-base md:text-[18px] text-[#666666] text-center max-w-[800px] leading-[1.7] m-0 font-normal font-sans px-4 mb-12"
+        data-aos="fade-up"
+        data-aos-duration="2000">
+        Discover extraordinary experiences crafted with passion and precision
+      </p><br/>
 
-            {/* Overlay content */}
-            <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-between p-4 md:p-6 text-white">
-              {/* Top Tags */}
-              <div className="flex justify-between items-start flex-wrap gap-2">
-                <span className="bg-purple-600 bg-opacity-80 text-white text-xs font-semibold px-3 md:px-5 py-2 rounded-full flex items-center shadow-lg">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 mr-1"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.72a1 1 0 01.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-                  </svg>
-                  Luxury Experience
-                </span>
-                <span className="bg-white bg-opacity-90 text-[#8A2BE2] text-xs font-semibold px-3 md:px-5 py-2 rounded-full shadow-lg">
-                  Music
-                </span>
-              </div>
-
-              {/* Play Button (only visible when not hovered and video not playing) */}
-              {!isVideoPlaying && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <button className="bg-white bg-opacity-30 backdrop-filter backdrop-blur-sm rounded-full p-3 md:p-4 text-white text-xl md:text-2xl group-hover:scale-110 transition-transform duration-300">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 md:h-8 md:w-8"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              )}
-
-              {/* Bottom Content */}
-              <div className="flex justify-between items-end">
-                <span className="text-base text-[#8A2BE2]  bg-opacity-90 md:text-lg font-bold bg-white px-3 py-1 rounded-md">
-                  From ₹5,000
-                </span>
-                <div className="flex items-center text-white">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 md:h-5 md:w-5 mr-1 text-yellow-400"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.72a1 1 0 01.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-                  </svg>
-                  <span className="font-semibold">4.9</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Section - Event Details */}
-          <div className="w-full lg:w-1/2 p-6 md:p-8 flex flex-col justify-center">
-            <p className="text-xs md:text-sm uppercase tracking-wider text-purple-600 font-semibold mb-2" style={{ letterSpacing: "6px" }}>
-              An Evening of Classical Elegance
-            </p>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-900 text-[#8A2BE2] mb-4 md:mb-6 leading-tight font-serif font -light">
-              Royal Symphony Gala
-            </h1>
-            <p className="text-gray-700 text-base md:text-lg mb-6 md:mb-8 leading-relaxed font-sans font-light">
-              Experience the pinnacle of classical music as world-renowned orchestras perform timeless masterpieces in
-              an atmosphere of unparalleled luxury.
-            </p>
-
-            <div className="space-y-3 md:space-y-4 mb-8 md:mb-10">
-              <div className="flex items-center text-gray-700">
-                <div className="w-5 h-5 md:w-6 md:h-6 mr-3 text-purple-600 flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 md:h-6 md:w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-                <span className="text-base font-[500] md:text-lg">March 15, 2024</span>
-              </div>
-              <div className="flex items-center text-gray-700">
-                <div className="w-5 h-5 md:w-6 md:h-6 mr-3 text-[#0056E3] flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 md:h-6 md:w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <span className="text-base font-[500] md:text-lg">7:00 PM</span>
-              </div>
-              <div className="flex items-center text-gray-700">
-                <div className="w-5 h-5 md:w-6 md:h-6 mr-3 text-[#008080] flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 md:h-6 md:w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </div>
-                <span className="text-base font-[500] md:text-lg">Grand Opera House, Mumbai</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-              <button className="flex-1 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center text-sm md:text-base">
-                Discover More
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 md:h-5 md:w-5 ml-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                </svg>
-              </button>
-              <button className="flex-1 px-6 md:px-8 py-3 md:py-4 border border-purple-400 text-purple-700 font-semibold rounded-full hover:bg-[#8A2BE2] hover:text-white hover:border-[#8A2BE2] transform hover:-translate-y-1 transition-all duration-300 text-sm md:text-base">
-                Book Now
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 2 Artisan's */}
-      <div
-        className="min-h-screen bg-[#fafafa] flex items-center justify-center mt-[-70px] p-4 sm:p-8"
-        data-aos="zoom-in"
-        data-aos-duration="2000"
-      >
-        <div className="flex flex-col lg:flex-row min-h-[70vh] rounded-2xl overflow-hidden max-w-8xl w-full ">
-          {/* Left Section - Event Details */}
-          <div className="w-full lg:w-1/2 p-6 md:p-8 flex flex-col justify-center order-2 lg:order-1">
-            <p className="text-xs md:text-sm uppercase tracking-wider text-purple-600 font-semibold mb-2" style={{ letterSpacing: "6px" }}>
-              CONTEMPORARY ART SHOWCASE
-            </p>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-900 text-[#8A2BE2] mb-4 md:mb-6 leading-tight font-serif font -light">
-              Artisan's Canvas
-            </h1>
-            <p className="text-gray-700 text-base md:text-lg mb-6 md:mb-8 leading-relaxed  font-sans font-light">
-              Experience the pinnacle of classical music as world-renowned orchestras perform timeless masterpieces in
-              an atmosphere of unparalleled luxury.
-            </p>
-
-            <div className="space-y-3 md:space-y-4 mb-8 md:mb-10">
-              <div className="flex items-center text-gray-700">
-                <div className="w-5 h-5 md:w-6 md:h-6 mr-3 text-purple-600 flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 md:h-6 md:w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-                <span className="text-base font-[500] md:text-lg">March 15, 2024</span>
-              </div>
-              <div className="flex items-center text-gray-700">
-                <div className="w-5 h-5 md:w-6 md:h-6 mr-3 text-[#0056E3]flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 md:h-6 md:w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <span className="text-base font-[500] md:text-lg">7:00 PM</span>
-              </div>
-              <div className="flex items-center text-gray-700">
-                <div className="w-5 h-5 md:w-6 md:h-6 mr-3 text-[#008080] flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 md:h-6 md:w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </div>
-                <span className="text-base md:text-lg font-[500]">Grand Opera House, Mumbai</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-              <button className="flex-1 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center text-sm md:text-base">
-                Discover More
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 md:h-5 md:w-5 ml-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                </svg>
-              </button>
-              <button className="flex-1 px-6 md:px-8 py-3 md:py-4 border border-purple-400 text-purple-700 font-semibold rounded-full hover:bg-[#8A2BE2] hover:text-white hover:border-[#8A2BE2] transform hover:-translate-y-1 transition-all duration-300 text-sm md:text-base">
-                Book Now
-              </button>
-            </div>
-          </div>
-
-          {/* Right Section - Image/Video */}
-    <div
-  className="relative w-full lg:w-1/2 h-64 sm:h-96 lg:h-auto overflow-hidden group order-1 lg:order-2"
-  onMouseEnter={handleMouseEnter}
-  onMouseLeave={handleMouseLeave}
->
-  <div className="absolute inset-0">
-    <img
-      src={artistphoto}
-      alt="Concert Crowd"
-      className={`w-full h-full object-cover transition-opacity duration-500 ${
-        isVideoPlaying ? "opacity-0" : "opacity-100"
-      }`}
-    />
-    <video
-      ref={videoRef}
-      src={artistvideo}
-      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-        isVideoPlaying ? "opacity-100" : "opacity-0"
-      }`}
-      loop
-      muted
-      playsInline
-    >             
-         Your browser does not support the video tag.
-              </video>
-            </div>
-
-            {/* Overlay content */}
-            <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-between p-4 md:p-6 text-white">
-              <div className="flex justify-between items-start flex-wrap gap-2">
-                <span className="bg-purple-600 bg-opacity-80 text-white text-xs font-semibold px-3 md:px-5 py-2 rounded-full flex items-center shadow-lg">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 mr-1"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.72a1 1 0 01.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-                  </svg>
-                  Luxury Experience
-                </span>
-                <span className="bg-white bg-opacity-90 text-[#8A2BE2] text-xs font-semibold px-3 md:px-5 py-2 rounded-full shadow-lg">
-                  Music
-                </span>
-              </div>
-
-              {!isVideoPlaying && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <button className="bg-white bg-opacity-30 backdrop-filter backdrop-blur-sm rounded-full p-3 md:p-4 text-white text-xl md:text-2xl group-hover:scale-110 transition-transform duration-300">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 md:h-8 md:w-8"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              )}
-
-              <div className="flex justify-between items-end">
-                <span className="text-base text-[#8A2BE2]  bg-opacity-90 md:text-lg font-bold bg-white px-3 py-1 rounded-md">
-                  From ₹5,000
-                </span>
-                <div className="flex items-center text-white">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 md:h-5 md:w-5 mr-1 text-yellow-400"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.72a1 1 0 01.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-                  </svg>
-                  <span className="font-semibold">4.9</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 3 Culinary */}
-      <div
-        className="min-h-screen bg-[#fafafa] flex items-center justify-center mt-[-70px] p-4 sm:p-8"
-        data-aos="zoom-in"
-        data-aos-duration="2000"
-      >
-        <div className="flex flex-col lg:flex-row min-h-[70vh] rounded-3x1 overflow-hidden max-w-8xl w-full ">
-          {/* Left Section - Image/Video */}
-          <div
-            className="relative w-full lg:w-1/2 h-64 sm:h-96 lg:h-auto overflow-hidden group"
-            onMouseEnter={() => setIsVideoPlaying(true)}
-            onMouseLeave={() => setIsVideoPlaying(false)}
-          >
-            {/* Background Image/Video */}
-            <div className="absolute inset-0">
+      {/* Events Grid */}
+      <div className="grid md:grid-cols-1 lg:grid-cols-3 lg:grid-cols-3 gap-8 w-full max-w-8xl" data-aos="fade-up" data-aos-duration="2500">
+        {events.map((event) => (
+          <div 
+            key={event.id} 
+            className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            data-aos="fade-up">
+            
+            {/* Image/Video Container with Overlay */}
+            <div className="relative h-64 w-full overflow-hidden">
+              {/* Image */}
               <img
-                src={reunionimage}
-                alt="Concert Crowd"
-                className={`w-full h-full object-cover transition-opacity duration-500 ${isVideoPlaying ? "opacity-0" : "opacity-100"}`}
+                src={event.image}
+                alt={event.title}
+                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
               />
+              
+              {/* Video */}
               <video
-                src={reunionvideo}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isVideoPlaying ? "opacity-100" : "opacity-0"}`}
-                autoPlay={isVideoPlaying}
+                autoPlay
                 loop
                 muted
                 playsInline
+                className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               >
-                Your browser does not support the video tag.
+                <source src={event.video} type="video/mp4" />
               </video>
-            </div>
-
-            {/* Overlay content */}
-            <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-between p-4 md:p-6 text-white">
-              <div className="flex justify-between items-start flex-wrap gap-2">
-                <span className="bg-purple-600 bg-opacity-80 text-white text-xs font-semibold px-3 md:px-5 py-2 rounded-full flex items-center shadow-lg">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 mr-1"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.72a1 1 0 01.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-                  </svg>
-                  Luxury Experience
-                </span>
-                <span className="bg-white bg-opacity-90 text-[#8A2BE2] text-xs font-semibold px-3 md:px-5 py-2 rounded-full shadow-lg">
-                  Music
-                </span>
-              </div>
-
-              {!isVideoPlaying && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <button className="bg-white bg-opacity-30 backdrop-filter backdrop-blur-sm rounded-full p-3 md:p-4 text-white text-xl md:text-2xl group-hover:scale-110 transition-transform duration-300">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 md:h-8 md:w-8"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+              
+              {/* Overlay Elements */}
+              <div className="absolute inset-0 bg-black bg-opacity-20 flex flex-col justify-between p-4 opacity-100 group-hover:opacity-0 transition-opacity duration-500">
+                {/* Top Row - Star Rating and Price */}
+                <div className="flex justify-between items-start">
+                  <div className="flex items-center bg-white bg-opacity-80 px-2 py-1 rounded-full">
+                    <FaStar className="text-yellow-400 mr-1" />
+                    <span className="text-sm font-medium">{event.rating}</span>
+                  </div>
+                  <div className="bg-gradient-to-r from-[#8A2BE2] to-[#0056B3] text-white px-3 py-1 rounded-full text-sm font-medium">
+                    {event.price}
+                  </div>
+                </div>
+                
+                {/* Bottom Row - Category and Play Button */}
+                <div className="flex justify-between items-end">
+                  <div className="bg-white bg-opacity-80 px-2 py-1 rounded-full flex items-center">
+                     <span className=" font-medium font-serif ">{event.category}</span>
+                  </div>
+                  <button className="bg-white bg-opacity-90 p-2 rounded-full hover:bg-opacity-100 transition-all">
+                    <FaPlay className="text-[#8A2BE2]" />
                   </button>
                 </div>
-              )}
+              </div>
+            </div>
 
-              <div className="flex justify-between items-end">
-                <span className="text-base text-[#8A2BE2] md:text-lg bg-opacity-90 font-bold bg-white px-3 py-1 rounded-md">
-                  From ₹5,000
-                </span>
-                <div className="flex items-center text-white">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 md:h-5 md:w-5 mr-1 text-yellow-400"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.72a1 1 0 01.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-                  </svg>
-                  <span className="font-semibold">4.9</span>
+            {/* Event Content */}
+            <div className="p-6 bg-white">
+              <div className="flex justify-between items-start mb-2">
+              </div>
+              
+                <h3 className="text-3xl  text-gray-900 mb-2 font-serif group-hover:text-[#8A2BE2] transition-colors duration-300">
+                {event.title}
+              </h3> 
+              <p className="text-gray-600 mb-4 font-sans ">{event.description}</p>
+              
+              <div className="space-y-3 text-sm text-gray-500">
+                <div className="flex items-center">
+                  <FaCalendarAlt className="w-4 h-4 mr-2 text-[#8A2BE2]" />
+                  <p className="font-sans">{event.date}</p>
+                </div>
+                <div className="flex items-center">
+                  <FaClock className="w-4 h-4 mr-2 text-[#0056B3]" />
+                  <p  className="font-sans">{event.time}</p>
+                </div>
+                <div className="flex items-center">
+                  <FaMapMarkerAlt className="w-4 h-4 mr-2 text-[#008080]" />
+                  <p  className="font-sans">{event.location}</p>
                 </div>
               </div>
+               <div className="flex justify-center mt-5">
+    <button className="px-[140px] py-3 bg-gradient-to-r from-[#8A2BE2] to-[#0056B3]  text-white font-sans rounded-[30px] hover:from-[#0056B3] hover:to-[#008080] transition-colors duration-300">
+        View Details
+    </button>
+</div>
             </div>
           </div>
-
-          {/* Right Section - Event Details */}
-          <div className="w-full lg:w-1/2 p-6 md:p-8 flex flex-col justify-center">
-            <p className="text-xs md:text-sm uppercase tracking-wider text-[#8A2BE2] font-semibold mb-2" style={{ letterSpacing: "6px" }}>
-              A MICHELIN STAR EXPERIENCE
-            </p>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-900 text-[#8A2BE2] mb-4 md:mb-6 leading-tight font-serif font -light">
-              Culinary Constellation
-            </h1>
-            <p className="text-gray-700 text-base md:text-lg mb-6 md:mb-8 leading-relaxed  font-sans font-light">
-              Experience the pinnacle of classical music as world-renowned orchestras perform timeless masterpieces in
-              an atmosphere of unparalleled luxury.
-            </p>
-
-            <div className="space-y-3 md:space-y-4 mb-8 md:mb-10">
-              <div className="flex items-center text-gray-700">
-                <div className="w-5 h-5 md:w-6 md:h-6 mr-3 text-purple-600 flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 md:h-6 md:w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-                <span className="text-base font-[500] md:text-lg">March 15, 2024</span>
-              </div>
-              <div className="flex items-center text-gray-700">
-                <div className="w-5 h-5 md:w-6 md:h-6 mr-3 text-[#0056E3] flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 md:h-6 md:w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <span className="text-base font-[500] md:text-lg">7:00 PM</span>
-              </div>
-              <div className="flex items-center text-gray-700">
-                <div className="w-5 h-5 md:w-6 md:h-6 mr-3 text-[#008080] flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 md:h-6 md:w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </div>
-                <span className="text-base md:text-lg font-[500]">Grand Opera House, Mumbai</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-              <button className="flex-1 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center text-sm md:text-base">
-                Discover More
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 md:h-5 md:w-5 ml-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                </svg>
-              </button>
-              <button className="flex-1 px-6 md:px-8 py-3 md:py-4 border border-purple-400 text-purple-700 font-semibold rounded-full hover:bg-[#8A2BE2] hover:text-white hover:border-[#8A2BE2] transform hover:-translate-y-1 transition-all duration-300 text-sm md:text-base">
-                Book Now
-              </button>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
-
-      {/* View All Experiences */}
-      <div className="min-h-[60vh] bg-[#fafafa] flex flex-col items-center justify-center py-8 md:py-[60px] px-4 md:px-[40px] font-['Times_New_Roman']">
-        <button className="flex items-center justify-center bg-black text-white text-lg md:text-[25px] px-12 md:px-[80px] py-4 md:py-5 rounded-full hover:bg-[#8A2BE2] transition duration-300 space-x-2">
-          <span>View All Experiences</span>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </button>
-      </div>
-
-</section>
+    </div>
 
 
 {/* spectrum  */}
    <div className="relative overflow-hidden" data-aos="fade-up">
-      <RoyalParticles className="z-0" intensity={0.3} />
-      <div className="container mx-auto relative z-10">
-        <section className="w-full text-center overflow-hidden py-10">
-          <div className="relative z-10 px-4 sm:px-6">
-            <div
-              className={`flex items-center justify-center mb-6 transition-all duration-1000 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-4"
-              }`}
-            >
-              <div className="h-px w-20 sm:w-28 bg-gradient-to-r from-transparent to-violet-500 opacity-40"></div>
-              <h4 className="text-sm sm:text-base md:text-lg font-semibold tracking-widest text-violet-600 uppercase mx-3 sm:mx-5">
-                Our Spectrum
-              </h4>
-              <div className="h-px w-20 sm:w-28 bg-gradient-to-l from-transparent to-violet-500 opacity-40"></div>
-            </div>
+  <RoyalParticles className="z-0" intensity={0.3} />
+  <div className="container mx-auto relative z-10">
+    <section className="w-full text-center overflow-hidden py-10">
+      <div className="relative z-10 px-4 sm:px-6">
+        {/* Title */}
+        <div
+          className={`flex items-center justify-center mb-6 transition-all duration-700 ${
+            isVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-4"
+          }`}
+        >
+          <div className="h-px w-20 sm:w-28 bg-gradient-to-r from-transparent to-violet-500 opacity-40"></div>
+          <h4 className="text-sm sm:text-base md:text-lg font-semibold tracking-widest text-violet-600 uppercase mx-3 sm:mx-5">
+            Our Spectrum
+          </h4>
+          <div className="h-px w-20 sm:w-28 bg-gradient-to-l from-transparent to-violet-500 opacity-40"></div>
+        </div>
 
-            <div
-              className={`transition-all duration-1000 delay-200 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
-            >
-              <h2 className=" spectrum-title  text-[2.3rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[7.5rem] font-serif font-bolder text-slate-900 leading-tight tracking-tight">
-                SPECTRUM OF
-              </h2>
-              <h3 className="text-[1.8rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4rem] font-serif font-bolder bg-gradient-to-r from-indigo-600 via-blue-600 to-violet-600 bg-clip-text text-transparent mt-1">
-                EXCELLENCE
-              </h3>
-            </div>
+        {/* Main Heading */}
+        <div
+          className={`transition-all duration-700 ${
+            isVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-6"
+          }`}
+        >
+          <h2 className="spectrum-title text-[2.3rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[7.5rem] font-serif font-bolder text-slate-900 leading-tight tracking-tight">
+            SPECTRUM OF
+          </h2>
+          <h3 className="text-[1.8rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4rem] font-serif font-bolder bg-gradient-to-r from-indigo-600 via-blue-600 to-violet-600 bg-clip-text text-transparent mt-1">
+            EXCELLENCE
+          </h3>
+        </div>
 
-            <p
-              className={`max-w-5xl mx-auto mt-6 text-sm sm:text-base md:text-lg text-gray-500 px-2 leading-relaxed transition-all duration-1000 delay-500 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-4"
-              }`}
-            >
-              From intimate gatherings to grand celebrations, we craft
-              experiences across every spectrum of human emotion and
-              celebration. Each category represents a unique facet of our
-              expertise and artistic vision.
-            </p>
-          </div>
-        </section>
-       <section className="py-6" ref={sectionRef}>
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-[1400px] mx-auto px-6">
+        {/* Paragraph */}
+        <p
+          className={`max-w-5xl mx-auto mt-6 text-sm sm:text-base md:text-lg text-gray-500 px-2 leading-relaxed transition-all duration-700 ${
+            isVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-4"
+          }`}
+        >
+          From intimate gatherings to grand celebrations, we craft experiences
+          across every spectrum of human emotion and celebration. Each category
+          represents a unique facet of our expertise and artistic vision.
+        </p>
+      </div>
+    </section>
 
-            {cardData.map((card, index) => {
-              const IconComponent = card.icon;
-              return (
-               <div
+    {/* Card Grid */}
+    <section className="py-6" ref={sectionRef}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-[1400px] mx-auto px-6">
+        {cardData.map((card, index) => {
+          const IconComponent = card.icon;
+          return (
+           <div
   key={index}
   ref={(el) => (cardRefs.current[index] = el)}
-  className="spectrum-card group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-violet-300 transition-all duration-700 ease-in-out p-8 flex flex-col justify-between min-h-[400px] h-full cursor-pointer"
+  className="spectrum-card group relative bg-white rounded-3xl shadow-lg border border-gray-200 transition-all duration-300 ease-out p-8 flex flex-col justify-between h-full min-h-[400px] cursor-pointer box-border overflow-hidden hover:shadow-xl hover:border-violet-300 hover:min-h-[395px]"
   data-aos="fade-up"
-  data-aos-delay={index * 100}
-  data-aos-duration="1000"
 >
-                  {/* 👉 Hover gradient background layer */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#d8f3ff] to-[#f3e8ff] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
+              {/* Hover Gradient */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#d8f3ff] to-[#f3e8ff] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
 
-                  <div className="absolute left-2 top-3 flex flex-col items-center gap-3 h-full z-10">
-                    {/* Dot */}
-                    <div className="absolute top-1 left-3 w-2.5 h-2.5 bg-violet-500 rounded-full z-20 opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 ease-in-out" />
-                    {/* Full Height Line */}
-                    <div className="w-1 h-full bg-gradient-to-b from-violet-500 to-indigo-500 rounded-full transform scale-y-0 group-hover:scale-y-100 mt-0 transition-transform duration-500 origin-top" />
-                  </div>
+              {/* Vertical Line & Dot */}
+              <div className="absolute left-2 top-3 flex flex-col items-center gap-3 h-full z-10">
+                <div className="absolute top-1 left-3 w-2.5 h-2.5 bg-violet-500 rounded-full z-20 opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300" />
+                <div className="w-1 h-full bg-gradient-to-b from-violet-500 to-indigo-500 rounded-full transform scale-y-0 group-hover:scale-y-100 mt-0 transition-transform duration-500 origin-top" />
+              </div>
 
-                  {/* Tag Badge */}
-                  {card.tag && (
-                    <div className="absolute top-4 right-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg group-hover:scale-110 transition-all duration-300 rotate-[0deg] group-hover:rotate-2">
-                      <span className="text-yellow-300">💎</span>
-                      {card.tag}
-                    </div>
-                  )}
+              {/* Tag */}
+              {card.tag && (
+                <div className="absolute top-4 right-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg group-hover:scale-110 transition-all duration-300 rotate-0 group-hover:rotate-2">
+                  <span className="text-yellow-300">💎</span>
+                  {card.tag}
+                </div>
+              )}
 
-                 <div className="relative z-10 flex flex-col h-full">
-  {/* Icon */}
-  <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 text-white mb-4 text-xl shadow-lg">
-    <IconComponent size={28} />
-  </div>
+              {/* Card Content */}
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 text-white mb-4 text-xl shadow-lg">
+                  <IconComponent size={28} />
+                </div>
 
-  {/* Subtitle */}
-  <p className="text-purple-600 text-xs font-bold tracking-wide uppercase mb-1">
-    {card.subtitle}
-  </p>
+                <p className="text-purple-600 text-xs font-bold tracking-wide uppercase mb-1">
+                  {card.subtitle}
+                </p>
 
-  {/* Title */}
-  <h3 className="text-lg font-semibold text-gray-900 mb-2">{card.title}</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  {card.title}
+                </h3>
 
-  {/* Count */}
-  <div className="inline-flex items-center bg-purple-100 text-sm text-purple-700 px-3 py-1 rounded-full mb-3 w-fit">
-    {card.count}
-  </div>
+                <div className="inline-flex items-center bg-purple-100 text-sm text-purple-700 px-3 py-1 rounded-full mb-3 w-fit">
+                  {card.count}
+                </div>
 
-  {/* Description */}
-  <p className="text-gray-600 text-sm leading-snug mb-5">{card.desc}</p>
+                <p className="text-gray-600 text-sm leading-snug mb-5">{card.desc}</p>
 
-  {/* Bottom Line */}
-  <div className="h-[1px] w-full bg-gradient-to-r from-violet-500 to-indigo-500 mb-3" />
+                <div className="h-[1px] w-full bg-gradient-to-r from-violet-500 to-indigo-500 mb-3" />
 
-  {/* Explore */}
-  <div className="flex items-center justify-between text-blue-800 text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-y-3 group-hover:translate-y-0 transition-all duration-500 delay-150">
-    <span>EXPLORE</span>
-    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-  </div>
-</div>
-</div>
-
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="max-w-7xl mx-auto px-6 py-16">
-          <div className="text-center space-y-8">
-            <p className="text-gray-500 text-lg max-w-4xl mx-auto leading-relaxed">
-              Can't find what you're looking for? We create bespoke experiences
-              tailored to your vision.
-            </p>
-            <div className="flex justify-center">
-              <button className="group bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:shadow-2xl hover:scale-105 flex items-center ">
-                <span>EXPLORE CUSTOM SOLUTIONS</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+                <div className="flex items-center justify-between text-blue-800 text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-y-3 group-hover:translate-y-0 transition-all duration-300">
+                  <span>EXPLORE</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
             </div>
-          </div>
-        </section>
+          );
+        })}
       </div>
-    </div>
+    </section>
+
+    {/* CTA Section */}
+    <section className="max-w-7xl mx-auto px-6 py-16">
+      <div className="text-center space-y-8">
+        <p className="text-gray-500 text-lg max-w-4xl mx-auto leading-relaxed">
+          Can't find what you're looking for? We create bespoke experiences
+          tailored to your vision.
+        </p>
+        <div className="flex justify-center">
+          <button className="group bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:shadow-2xl hover:scale-105 flex items-center">
+            <span>EXPLORE CUSTOM SOLUTIONS</span>
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
 
 
 
