@@ -4,7 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { FaPaperPlane } from 'react-icons/fa';
 
-function  Celebration() {
+function Celebration() {
   const [particles, setParticles] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState(null);
 
@@ -27,23 +27,22 @@ function  Celebration() {
     }
     setParticles(initialParticles);
 
-    const animateParticles = () => {
+   useEffect(() => {
+  const interval = setInterval(() => {
     setParticles(prev =>
       prev.map(p => {
-    const nx = p.x + p.speedX;
-    const ny = p.y + p.speedY;
-    return {
-      ...p,
-      x: nx > innerWidth ? 0 : nx < 0 ? innerWidth : nx,
-      y: ny > innerHeight ? 0 : ny < 0 ? innerHeight : ny,
-    };
-  })
-);
+        const nx = p.x + p.speedX;
+        const ny = p.y + p.speedY;
+        return {
+          ...p,
+          x: nx > innerWidth ? 0 : nx < 0 ? innerWidth : nx,
+          y: ny > innerHeight ? 0 : ny < 0 ? innerHeight : ny,
+        };
+      })
+    );
+  }, 50);
 
-    // Keep particle movement as it's a visual effect, not an entrance animation
-    useEffect(() => {
-  const interval = setInterval(animateParticles, 50);
-  return () => clearInterval(interval);  // ✅ inside useEffect
+  return () => clearInterval(interval);
 }, []);
 
   const handleBackToHome = () => {
@@ -572,4 +571,4 @@ function  Celebration() {
   );
 }
 
-export default  Celebration;
+export default Celebration;
