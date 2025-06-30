@@ -41,9 +41,10 @@ function Celebration() {
 );
 
     // Keep particle movement as it's a visual effect, not an entrance animation
-    const interval = setInterval(animateParticles, 50);
-    return () => clearInterval(interval);
-  }, []);
+    useEffect(() => {
+  const interval = setInterval(animateParticles, 50);
+  return () => clearInterval(interval);  // ✅ inside useEffect
+}, []);
 
   const handleBackToHome = () => {
     console.log('Navigating to home');
