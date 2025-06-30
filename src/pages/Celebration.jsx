@@ -28,16 +28,17 @@ function Celebration() {
     setParticles(initialParticles);
 
     const animateParticles = () => {
-      setParticles(prev =>
-        prev.map(p => ({
-          ...p,
-          x: p.x + p.speedX,
-          y: p.y + p.speedY,
-          x: p.x > window.innerWidth ? 0 : p.x < 0 ? window.innerWidth : p.x,
-          y: p.y > window.innerHeight ? 0 : p.y < 0 ? window.innerHeight : p.y,
-        }))
-      );
-    };
+    setParticles(prev =>
+      prev.map(p => {
+    const nx = p.x + p.speedX;
+    const ny = p.y + p.speedY;
+    return {
+      ...p,
+      x: nx > innerWidth ? 0 : nx < 0 ? innerWidth : nx,
+      y: ny > innerHeight ? 0 : ny < 0 ? innerHeight : ny,
+    };
+  })
+);
 
     // Keep particle movement as it's a visual effect, not an entrance animation
     const interval = setInterval(animateParticles, 50);
