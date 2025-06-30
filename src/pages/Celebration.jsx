@@ -4,7 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { FaPaperPlane } from 'react-icons/fa';
 
-function Celebration() {
+function  Celebration() {
   const [particles, setParticles] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState(null);
 
@@ -572,4 +572,4 @@ function Celebration() {
   );
 }
 
-export default Celebration;
+export default  Celebration;
