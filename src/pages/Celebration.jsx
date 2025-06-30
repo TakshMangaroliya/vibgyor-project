@@ -571,4 +571,4 @@ function Celebration() {
   );
 }
 
-export default Celebration;
+export default Celebration
